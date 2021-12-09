@@ -1,25 +1,25 @@
 $colors: "green" #24D024 1s, "yellow" #fff952 0.75s, "pink" #f53896 0.5s, "red" #fb4545 0.66s, "blue" #0A53DE 1.33s;
 
-@for $i from 1 through 300 {
-  @each $name, $color, $timing in $colors {
-    .#{$name}-#{$i} {
-      background-color: $color;
-      animation: lightning-#{$name}-#{$i} #{$i/100}s infinite;
-    }
-    @keyframes lightning-#{$name}-#{$i} {
-      0% {
-        box-shadow: 10px 0 70px 20px #{$color};
-      }
-      50% {
-        box-shadow: none;
-      }
-      100% {
-        box-shadow: 10px 0 70px 20px #{$color};
-      }
-    }
-  }
-
-}
+//@for $i from 1 through 300 {
+//  @each $name, $color, $timing in $colors {
+//    .#{$name}-#{$i} {
+//      background-color: $color;
+//      animation: lightning-#{$name}-#{$i} #{$i/100}s infinite;
+//    }
+//    @keyframes lightning-#{$name}-#{$i} {
+//      0% {
+//        box-shadow: 10px 0 70px 20px #{$color};
+//      }
+//      50% {
+//        box-shadow: none;
+//      }
+//      100% {
+//        box-shadow: 10px 0 70px 20px #{$color};
+//      }
+//    }
+//  }
+//
+//}
 
 .line {
   text-align: center;

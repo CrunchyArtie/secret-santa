@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: ''
+  apiUrl: 'https://crunchy-secret-santa-api.herokuapp.com/api'
 };

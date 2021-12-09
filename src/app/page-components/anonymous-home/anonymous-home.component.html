@@ -1,0 +1,40 @@
+<div class="window">
+  <div class="santa">
+    <div class="head">
+      <div class="face">
+        <div class="redhat">
+          <div class="whitepart"></div>
+          <div class="redpart"></div>
+          <div class="hatball"></div>
+        </div>
+        <div class="eyes"></div>
+        <div class="beard">
+          <div class="nouse"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+      <div class="ears"></div>
+    </div>
+    <div class="body"></div>
+  </div>
+</div>
+<div class="message">
+  <h1>Bienvenue !</h1>
+  <div *ngIf="isBeforeLimit()">
+    Pour participer, il va te falloir un compte. Si tu en as un tu peux déjà te connecter, sinon
+    il faut en créer un. Mais attention, il faut l'avoir fait avant {{dateString}} !
+    <div class="actions">
+      <button mat-raised-button routerLink="register">Créer un compte</button>
+      <button mat-raised-button routerLink="login">Se connecter</button>
+    </div>
+  </div>
+  <div *ngIf="isAfterLimit()">
+    Normalement, tu as déjà un compte, alors connectes-toi pour commencer !
+    Si tu veux te créer un compte pour participer, je suis désolé mais c'est trop tard. Le tirage au sort a déjà été
+    réalisé.
+    <div class="actions">
+      <button mat-raised-button routerLink="login">Se connecter</button>
+    </div>
+  </div>
+</div>
+

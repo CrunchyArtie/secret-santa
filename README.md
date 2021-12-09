@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# TODO
+- Les gens puissent s'inscrire avec un login/mot de passe jusqu'à la date limite.
+- Les gens puissent se connecter à partir de la date limite.
+- Une fois connecté un utilisateur puisse découvrir de quel utilisateur il sera le secret santa.
+- Des jolies animations de Noël

@@ -1,0 +1,7 @@
+<div class="lights">
+    <div class="line">
+      <div class="letter" *ngFor="let letter of wall" [ngClass]="getClass(letter)">
+        {{letter.label}}
+      </div>
+    </div>
+</div>

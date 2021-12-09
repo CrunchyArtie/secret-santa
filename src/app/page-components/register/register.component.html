@@ -1,0 +1,41 @@
+<form novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <h1>Devenir un Secret Santa</h1>
+    </mat-card-header>
+
+    <mat-card-content>
+      <label for="username">Il va te falloir un pseudo unique mais qui permet aux autres de te reconnaitre facilement.</label>
+      <p>
+        <mat-form-field>
+          <input id="username" matInput formControlName="username" placeholder="Pseudo" type="text" required>
+          <mat-error *ngIf="getError('username')">{{getError('username')}}</mat-error>
+        </mat-form-field>
+      </p>
+      <label for="password">Ton mot de passe est essentiel pour te connecter (ne t'inquiète pas, les elfes n'y ont pas accès).</label>
+      <p>
+        <mat-form-field>
+          <input id="password" matInput formControlName="password" placeholder="Mot de passe" type="password" required>
+          <mat-error *ngIf="getError('password')">{{getError('password')}}</mat-error>
+        </mat-form-field>
+      </p>
+      <label for="password-confirmation">pour etre sur que tu n'ais pas faire de faute.</label>
+      <p>
+        <mat-form-field>
+          <input id="password-confirmation" matInput formControlName="password-confirmation" placeholder="Mot de passe, encore" type="password" required>
+          <mat-error *ngIf="getError('password-confirmation')">{{getError('password-confirmation') }}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="customErrors.length > 0">
+        <span>Zut ! </span>
+        <span *ngFor="let e of customErrors"> {{e}} </span>
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-raised-button type="submit" (click)="onSubmit()" [disabled]="registerForm.invalid">S'inscrire</a>
+      <a mat-raised-button routerLink="/login">Se rendre a la page de connexion</a>
+    </mat-card-actions>
+  </mat-card>
+</form>

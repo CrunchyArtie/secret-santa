@@ -1,0 +1,19 @@
+<div class="content">
+  <h1>Bienvenue {{username}}!</h1>
+
+  <div *ngIf="isBeforeLimit()">
+    <p>Le tirage au sort n'a pas encore eu lieu, on attend que tout le monde ai eu la chance de s'inscrire.</p>
+    <p>Tu peux revenir après {{dateString}} pour découvrir le nom de celui qui te sera assigner.</p>
+  </div>
+
+  <div *ngIf="isAfterLimit()">
+    <p>On est près !</p>
+    <p>Le tirage au sort a eu lieu !</p>
+    <p>Es-Tu prêt à découvrir quel nom tu as tiré ?</p>
+    <div class="actions">
+      <a mat-raised-button routerLink="/discover">Découvrir</a>
+    </div>
+  </div>
+
+  <button mat-raised-button routerLink="/rules">Si tu veux voir les règles ça se passe là</button>
+</div>

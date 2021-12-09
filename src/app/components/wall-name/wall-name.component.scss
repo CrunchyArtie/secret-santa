@@ -1,0 +1,70 @@
+$colors: "green" #24D024 1s, "yellow" #fff952 0.75s, "pink" #f53896 0.5s, "red" #fb4545 0.66s, "blue" #0A53DE 1.33s;
+
+@for $i from 1 through 300 {
+  @each $name, $color, $timing in $colors {
+    .#{$name}-#{$i} {
+      background-color: $color;
+      animation: lightning-#{$name}-#{$i} #{$i/100}s infinite;
+    }
+    @keyframes lightning-#{$name}-#{$i} {
+      0% {
+        box-shadow: 10px 0 70px 20px #{$color};
+      }
+      50% {
+        box-shadow: none;
+      }
+      100% {
+        box-shadow: 10px 0 70px 20px #{$color};
+      }
+    }
+  }
+
+}
+
+.line {
+  text-align: center;
+}
+
+.letter {
+  position: relative;
+  margin: 0 30px 40px 30px;
+  list-style: none;
+  padding: 7px 0 0;
+  display: inline-block;
+  width: 18px;
+  height: 42px;
+  border-radius: 50%;
+  top: 52px;
+  //background: #fff;
+
+  &:before {
+    content: "";
+    position: absolute;
+    background: #222;
+    width: 15px;
+    height: 13px;
+    border-radius: 3px;
+    top: -6px;
+    left: 2px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .line {
+    //padding: 0;
+  }
+  .letter {
+  }
+}
+
+.lights {
+  max-width: 560px;
+  min-height: 400px;
+}
+
+.dummy-letter.dead {
+  transition: background-color 3s, animation 5s;
+  background-color: black;
+  box-shadow: none;
+  animation: none;
+}

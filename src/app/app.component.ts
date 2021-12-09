@@ -3,7 +3,7 @@ import {routes} from './app-routing.module'
 import {AuthenticationService} from './services/authentication.service';
 import {Router} from '@angular/router';
 import {MaintenanceService} from './services/maintenance.service';
-import {filter} from 'rxjs/operators';
+import {debounceTime, filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -37,8 +37,11 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.isDown$.pipe(filter(idDown => idDown)).subscribe((isDown) => {
-      this.router.navigate(['/', 'maintenance'])
+    this.router.navigate(['/', 'maintenance'])
+
+    this.isDown$.pipe(filter(idDown => !idDown),
+      debounceTime(100)).subscribe((isDown) => {
+      this.router.navigate(['/'])
     })
   }
 }

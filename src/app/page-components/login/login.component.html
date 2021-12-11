@@ -5,27 +5,23 @@
     </mat-card-header>
 
     <mat-card-content>
-      <p>
-        <mat-form-field>
-          <input id="username" matInput formControlName="username" placeholder="Pseudo" type="text" required>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field>
-          <input id="password" matInput formControlName="password" placeholder="Mot de passe" type="password" required>
-        </mat-form-field>
-      </p>
-
-      <p *ngIf="customErrors.length > 0">
-        <span>Zut ! </span>
-        <span *ngFor="let e of customErrors"> {{e}} </span>
-      </p>
+      <mat-form-field>
+        <input id="username" matInput formControlName="username" placeholder="Pseudo" type="text" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input id="password" matInput formControlName="password" placeholder="Mot de passe" type="password" required>
+      </mat-form-field>
+      <ng-container *ngIf="customErrors.length > 0">
+        <mat-error>Zut ! </mat-error>
+        <mat-error *ngFor="let e of customErrors"> {{e}} </mat-error>
+      </ng-container>
     </mat-card-content>
 
     <mat-card-actions>
       <a mat-raised-button type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Se connecter</a>
       <p>
-        Si tu as oublié ton mot de passe, ne t'en fais pas, tu dois surement connaitre l'un des elfes qui a développer cette plateforme, il t'aidera.
+        Si tu as oublié ton mot de passe, ne t'en fais pas, tu dois surement connaitre l'un des elfes qui a développer
+        cette plateforme, il t'aidera.
       </p>
     </mat-card-actions>
   </mat-card>

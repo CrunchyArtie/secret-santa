@@ -5,32 +5,28 @@
     </mat-card-header>
 
     <mat-card-content>
-      <label for="username">Il va te falloir un pseudo unique mais qui permet aux autres de te reconnaitre facilement.</label>
-      <p>
-        <mat-form-field>
-          <input id="username" matInput formControlName="username" placeholder="Pseudo" type="text" required>
-          <mat-error *ngIf="getError('username')">{{getError('username')}}</mat-error>
-        </mat-form-field>
-      </p>
-      <label for="password">Ton mot de passe est essentiel pour te connecter (ne t'inquiète pas, les elfes n'y ont pas accès).</label>
-      <p>
-        <mat-form-field>
-          <input id="password" matInput formControlName="password" placeholder="Mot de passe" type="password" required>
-          <mat-error *ngIf="getError('password')">{{getError('password')}}</mat-error>
-        </mat-form-field>
-      </p>
+      <label for="username">Il va te falloir un pseudo unique mais qui permet aux autres de te reconnaitre
+        facilement.</label>
+      <mat-form-field>
+        <input id="username" matInput formControlName="username" placeholder="Pseudo" type="text" required>
+        <mat-error *ngIf="getError('username')">{{getError('username')}}</mat-error>
+      </mat-form-field>
+      <label for="password">Ton mot de passe est essentiel pour te connecter (ne t'inquiète pas, les elfes n'y ont pas
+        accès).</label>
+      <mat-form-field>
+        <input id="password" matInput formControlName="password" placeholder="Mot de passe" type="password" required>
+        <mat-error *ngIf="getError('password')">{{getError('password')}}</mat-error>
+      </mat-form-field>
       <label for="password-confirmation">pour etre sur que tu n'ais pas faire de faute.</label>
-      <p>
-        <mat-form-field>
-          <input id="password-confirmation" matInput formControlName="password-confirmation" placeholder="Mot de passe, encore" type="password" required>
-          <mat-error *ngIf="getError('password-confirmation')">{{getError('password-confirmation') }}</mat-error>
-        </mat-form-field>
-      </p>
-
-      <p *ngIf="customErrors.length > 0">
-        <span>Zut ! </span>
-        <span *ngFor="let e of customErrors"> {{e}} </span>
-      </p>
+      <mat-form-field>
+        <input id="password-confirmation" matInput formControlName="password-confirmation"
+               placeholder="Mot de passe, encore" type="password" required>
+        <mat-error *ngIf="getError('password-confirmation')">{{getError('password-confirmation') }}</mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="customErrors.length > 0">
+        <mat-error class="mat-error">Zut ! </mat-error>
+        <mat-error class="mat-error" *ngFor="let e of customErrors"> {{e}} </mat-error>
+      </ng-container>
     </mat-card-content>
 
     <mat-card-actions>

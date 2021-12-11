@@ -9,3 +9,9 @@
 .home-link {
   cursor: pointer;
 }
+
+.rules {
+  @media (max-width: 500px) {
+    display: none
+  }
+}

@@ -1,10 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 import {LetterType} from '../../models/letter.type';
 import {Letter} from '../../models/letter';
 import {UpperCase} from '../../decorators/upper.case';
 
 const AVAILABLE_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const AVAILABLE_TIMING = [0.75, 1, 1.25, 1.5]; // Copy it to the scss file
+const DEAD_ANIMATION_DELAY = 3000;
+const DEAD_ANIMATION_TIME_LAPSE = 750;
 const ROWS_LIMIT = 4;
 const COLORS = [
   'red',
@@ -13,6 +16,7 @@ const COLORS = [
   'pink',
   'green'
 ]
+
 
 @Component({
   selector: 'app-wall-name',
@@ -24,6 +28,8 @@ export class WallNameComponent implements OnInit {
   @UpperCase()
   @Input() name = '';
   public wall: Letter[] = [];
+  public isEnding = false;
+  @ViewChild('content') elementView!: ElementRef;
 
   public ngOnInit(): void {
     this.generateWall();
@@ -35,10 +41,27 @@ export class WallNameComponent implements OnInit {
       active = 'active-letter'
     }
 
-    const colorAnimated = letter.color+ '-' + letter.timing;
+    const colorAnimated = letter.color + '-' + letter.timing.toString().replace('.', '-');
     const isActive = active
     const isDead = letter.isDead ? 'dead' : '';
-    return  [colorAnimated, isActive, isDead]
+    const isHide = letter.hide ? 'hide' : '';
+
+    return [colorAnimated, isActive, isDead, isHide].join(' ')
+  }
+
+  public isEndOfLine(index: number) {
+    const indexes = [0, 2, 5, 9, 14, 20, 27, 35, 44];
+    return indexes.includes(index);
+  }
+
+  public getStyle(): any {
+    if (!!this.elementView) {
+      const height = this.elementView.nativeElement.offsetHeight;
+      return {
+        'border-width': '0 ' + height/3 + 'px ' + (height + 15) + 'px ',
+      };
+    }
+    return {}
   }
 
   private generateWall(): void {
@@ -47,11 +70,16 @@ export class WallNameComponent implements OnInit {
     this.dispatchTheNameInAWall(this.wall, this.name);
     this.fillTheEmptyValuesOfTheWall(this.wall)
 
-    this.wall.filter(l => l.type === LetterType.dummy).forEach((l, index) => {
-      setTimeout(() => l.isDead = true, (index + 3) * 1500)
-    })
+    const dummies = this.wall.filter(l => l.type === LetterType.dummy);
 
-    // setTimeout(() => this.dummyLightsAreDead = true, 7*1000)
+    _.shuffle(dummies).forEach((l, index) =>
+      setTimeout(() => l.isDead = true, DEAD_ANIMATION_DELAY + (index) * DEAD_ANIMATION_TIME_LAPSE)
+    )
+
+    setTimeout(() => {
+      this.isEnding = true;
+      dummies.map(l => l.hide = true);
+    }, DEAD_ANIMATION_DELAY + dummies.length * DEAD_ANIMATION_TIME_LAPSE)
   }
 
   private dispatchTheNameInAWall(wall: Letter[], name: string): Letter[] {
@@ -88,7 +116,8 @@ export class WallNameComponent implements OnInit {
         type: LetterType.active,
         color: wall[letterAbsolutePositionWithOffset].color,
         timing: wall[letterAbsolutePositionWithOffset].timing,
-        isDead: false
+        isDead: false,
+        hide: false
       };
       lastLetterPosition = letterAbsolutePositionWithOffset; // 3 | 4
     });
@@ -131,7 +160,7 @@ export class WallNameComponent implements OnInit {
         type: LetterType.dummy,
         // @ts-ignore
         color: availableColors.shift(),
-        timing: 75 + Math.floor(Math.random()*225)
+        timing: AVAILABLE_TIMING[Math.floor(Math.random() * AVAILABLE_TIMING.length)]
       })
     }
   }

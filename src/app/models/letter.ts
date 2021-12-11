@@ -6,4 +6,5 @@ export interface Letter {
     color: string;
     timing: number;
     isDead: boolean;
+    hide: boolean;
 }

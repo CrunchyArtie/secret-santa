@@ -2,7 +2,7 @@
   <mat-toolbar>
     <span (click)="goHome()" class="home-link">Secret Santa</span>
     <span class="spacer"></span>
-    <button mat-button routerLink="/rules">
+    <button mat-button routerLink="/rules" class="rules">
       Les règles
     </button>
     <button mat-button (click)="logout()" *ngIf="canDisconnect()">

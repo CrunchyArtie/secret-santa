@@ -1,7 +1,26 @@
-<div class="lights">
-    <div class="line">
-      <div class="letter" *ngFor="let letter of wall" [ngClass]="getClass(letter)">
-        {{letter.label}}
-      </div>
+
+<div [ngClass]="{isEnding}" class="disclaimer">
+  Super ! Tu es donc le Secret Santa de :
+</div>
+<div class="lights" #content [ngClass]="{isEnding: isEnding}">
+  <div class="christmas" [ngClass]="{isEnding: isEnding}">
+    <div class="tree">
+      <div class="chain"></div>
+      <div class="chain2"></div>
     </div>
+    <div class="star"></div>
+    <div class="gift"></div>
+    <div class="ribbon"></div>
+    <div class="gift2"></div>
+    <div class="ribbon2"></div>
+    <div class="gift3"></div>
+    <div class="ribbon3"></div>
+    <div class="shadow"></div>
+  </div>
+  <ng-container *ngFor="let letter of wall; let index = index">
+    <div class="letter" [ngClass]="getClass(letter)">
+      <span>{{letter.label}}</span>
+    </div>
+    <div class="divider" *ngIf="isEndOfLine(index)" [ngClass]="{isEnding: isEnding}"></div>
+  </ng-container>
 </div>

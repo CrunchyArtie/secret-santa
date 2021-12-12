@@ -18,8 +18,9 @@ import { RulesComponent } from './page-components/rules/rules.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MaintenanceComponent } from './page-components/maintenance/maintenance.component';
+import {AuthInterceptor} from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { MaintenanceComponent } from './page-components/maintenance/maintenance.
     ReactiveFormsModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

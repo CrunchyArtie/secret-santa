@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 import {LetterType} from '../../models/letter.type';
 import {Letter} from '../../models/letter';
@@ -23,15 +23,17 @@ const COLORS = [
   templateUrl: './wall-name.component.html',
   styleUrls: ['./wall-name.component.scss']
 })
-export class WallNameComponent implements OnInit {
+export class WallNameComponent implements OnChanges {
 
   @UpperCase()
   @Input() name = '';
   public wall: Letter[] = [];
   public isEnding = false;
   @ViewChild('content') elementView!: ElementRef;
+  public isNoWrap =  false;
 
-  public ngOnInit(): void {
+  public ngOnChanges(changes: SimpleChanges): void {
+    this.wall = [];
     this.generateWall();
   }
 
@@ -54,15 +56,15 @@ export class WallNameComponent implements OnInit {
     return indexes.includes(index);
   }
 
-  public getStyle(): any {
-    if (!!this.elementView) {
-      const height = this.elementView.nativeElement.offsetHeight;
-      return {
-        'border-width': '0 ' + height/3 + 'px ' + (height + 15) + 'px ',
-      };
-    }
-    return {}
-  }
+  // public getStyle(): any {
+  //   if (!!this.elementView) {
+  //     const height = this.elementView.nativeElement.offsetHeight;
+  //     return {
+  //       'border-width': '0 ' + height/3 + 'px ' + (height + 15) + 'px ',
+  //     };
+  //   }
+  //   return {}
+  // }
 
   private generateWall(): void {
     const limit = this.getNumberOfNeededLetters();
@@ -79,6 +81,8 @@ export class WallNameComponent implements OnInit {
     setTimeout(() => {
       this.isEnding = true;
       dummies.map(l => l.hide = true);
+
+      // setTimeout(() => this.isNoWrap = true, 3500)
     }, DEAD_ANIMATION_DELAY + dummies.length * DEAD_ANIMATION_TIME_LAPSE)
   }
 

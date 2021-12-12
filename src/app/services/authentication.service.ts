@@ -85,4 +85,8 @@ export class AuthenticationService {
   private handleError(data: HttpErrorResponse): Observable<ApiResponse> {
     return of({data: null, errors: _.get(data, 'error.errors', ['Le serveur a rencontré une erreur !'])});
   }
+
+  public getToken() {
+    return this.getCacheAuthUser()?.token;
+  }
 }
